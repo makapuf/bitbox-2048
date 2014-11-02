@@ -5,6 +5,7 @@
 	TODO: 
 		highlights
 		musique, animations (bg)
+		sounds
 		2 players : si augmente de 1, balance a l'autre ?
 
 */
@@ -155,7 +156,7 @@ static void drawNumber(int x, int y, long number, int length) {
         number /= 10;
     } while (++pos < length);
 }
-
+/*
 void tmap_blit(int x, int y, uint32_t header, const uint8_t *src)
 {
 	int tmapw = (header>>24);
@@ -168,21 +169,22 @@ void tmap_blit(int x, int y, uint32_t header, const uint8_t *src)
 			if (c) tmap_screen[(j+y)*SCREEN_W+i+x] = c;
 		}
 }
+*/
 
 void draw()
 {
 	// draw bg
 	if (game.state==StateStartScreen) {
-		tmap_blit(0,0,levels_header,&levels_tmap[levels_start][0]);
+		tmap_blit(game.o,0,0,levels_header,&levels_tmap[levels_start][0]);
 		return;
 	}
 
 	else 
-		tmap_blit(0,0,levels_header,&levels_tmap[game.level][0]);
+		tmap_blit(game.o,0,0,levels_header,&levels_tmap[game.level][0]);
 
 	// draw board
 	for (int i=0;i<16;i++) {
-		tmap_blit(BOARD_X+4*(i%4),BOARD_Y+4*(i/4),pieces_header,&pieces_tmap[game.tab[i]][0]);
+		tmap_blit(game.o,BOARD_X+4*(i%4),BOARD_Y+4*(i/4),pieces_header,&pieces_tmap[game.tab[i]][0]);
 	}
 
 	// scores
@@ -191,14 +193,14 @@ void draw()
 	
 	
 
-	if (game.best_score == game.score) {
-		game.o->x = rand()%16;
-		game.o->y = rand()%16;
-		tmap_blit(EXCITE_X,EXCITE_Y,levels_header,&levels_tmap[levels_excite][0]);
+	if (game.score >= game.best_score+1000) {
+		game.o->x = rand()%8;
+		game.o->y = rand()%8;
+		tmap_blit(game.o,EXCITE_X,EXCITE_Y,levels_header,&levels_tmap[levels_excite][0]);
 	}
 
 	if (game.state==StateGameOver)
-		tmap_blit(GAMEOVER_X,GAMEOVER_Y,levels_header,&levels_tmap[levels_gameover][0]);
+		tmap_blit(game.o,GAMEOVER_X,GAMEOVER_Y,levels_header,&levels_tmap[levels_gameover][0]);
 	
 }
 
@@ -259,12 +261,6 @@ void game_frame()
 	}
 
 	draw();
-	blitter_frame();
-}
-
-void game_line()
-{
-	blitter_line();
 }
 
 void game_snd_buffer(uint16_t *a, int b) {
