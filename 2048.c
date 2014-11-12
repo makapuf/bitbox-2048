@@ -232,6 +232,8 @@ void game_init()
 void game_frame() 
 {
 	int dir;
+	kbd_emulate_gamepad ();
+
 
 	// update game
 	switch (game.state) {
