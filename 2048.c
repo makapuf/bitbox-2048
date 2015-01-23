@@ -221,7 +221,7 @@ void reset_game()
 void game_init()
 {
  	blitter_init();
-	game.o = tilemap_new(&levels_tset[0],640,480,SCREEN_W<<24|SCREEN_H<<16|1,&tmap_screen[0]);  
+	game.o = tilemap_new(&levels_tset[0],640,480,TMAP_HEADER(SCREEN_W,SCREEN_H,TSET_16, TMAP_U8),&tmap_screen[0]);  
 	game.o->x=0; 
 	game.o->y=0;
 
@@ -232,6 +232,8 @@ void game_init()
 void game_frame() 
 {
 	int dir;
+	kbd_emulate_gamepad ();
+
 
 	// update game
 	switch (game.state) {
