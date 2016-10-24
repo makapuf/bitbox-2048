@@ -12,7 +12,7 @@
 #include <stdint.h>
 #include <stdlib.h> // rand
 #include <bitbox.h> 
-#include <blitter.h>
+#include <lib/blitter/blitter.h>
 
 #include "levels.h"
 #include "pieces.h"
@@ -232,8 +232,6 @@ void game_init()
 void game_frame() 
 {
 	int dir;
-	kbd_emulate_gamepad ();
-
 
 	// update game
 	switch (game.state) {
@@ -263,8 +261,4 @@ void game_frame()
 	}
 
 	draw();
-}
-
-void game_snd_buffer(uint16_t *a, int b) {
-
 }
