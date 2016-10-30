@@ -4,12 +4,10 @@ dist: trusty
 
 language: c 
 before_script:
-  - git clone https://github.com/makapuf/bitbox.git 
+  - git clone https://github.com/makapuf/bitbox.git
+  # now using v0.10 kernel
+  - git checkout v0.10 
 
-  ## Install mainline ARM toolchain.  gcc-arm-none-eabi is available
-  ## in Ubuntu >= 14.04, but this external PPA is needed for 12.04.
-  ## (from kontiki)
-  ## also install a newer version of gcc
   - sudo apt-get -qq update
   - sudo apt-get -qq install libsdl1.2-dev python-imaging gcc-arm-none-eabi
   - pip install pillow
