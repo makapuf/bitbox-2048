@@ -5,9 +5,6 @@ dist: trusty
 language: c 
 before_script:
   - git clone https://github.com/makapuf/bitbox.git
-  - git branch -l
-  - git checkout v0.10
-
   - sudo apt-get -qq update
   - sudo apt-get -qq install libsdl1.2-dev python-imaging gcc-arm-none-eabi
   - pip install pillow
