@@ -1,24 +1,20 @@
 # Object files
 *.o
-*.ko
-
-# Libraries
-*.lib
-*.a
-
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+*.map
 
 # Executables
-*.exe
-*.out
-*.app
-roms/*
-src/bitboy.bin
-src/bitboy.elf
-src/bitboy_emu
-src/build/*
+*.bin
+*.elf
+*_emu
+build/*
 
+# Generated files
+levels.h
+levels.tmap
+levels.tset
+pieces.h
+pieces.tmap
+pieces.tset
+
+# Other stuff
+*.swp
